@@ -2,15 +2,33 @@ package p2j.evolv.com.p2j_v2.screens;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import p2j.evolv.com.p2j_v2.R;
 import p2j.evolv.com.p2j_v2.components.ListFragment;
+import p2j.evolv.com.p2j_v2.files.FileUtils;
+import p2j.evolv.com.p2j_v2.handlers.refresh.RefreshHandler;
+import p2j.evolv.com.p2j_v2.model.FileDto;
+import p2j.evolv.com.p2j_v2.processors.PdfProcessor;
+import p2j.evolv.com.p2j_v2.services.FileConversionService;
+import p2j.evolv.com.p2j_v2.services.ServiceModule;
+import p2j.evolv.com.p2j_v2.services.ServiceType;
 
 public class P2J extends AppCompatActivity {
+    private Fragment listFragment = ListFragment.newInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +43,7 @@ public class P2J extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.root_layout, ListFragment.newInstance(), "filesList")
+                    .replace(R.id.root_layout, listFragment, "filesList")
                     .commit();
         }
 //        P2jBinding binding = DataBindingUtil.setContentView(this, R.layout.p2j);
@@ -33,5 +51,40 @@ public class P2J extends AppCompatActivity {
 ////
 //        binding.
 //        binding.setUser(user);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.global_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.back:
+                ((ListFragment) listFragment).up();
+                return true;
+            case R.id.convert:
+                if (FileUtils.isValidPath()) {
+                    Map<String, Parcelable> properties = new HashMap<>();
+                    properties.put("fileDto", FileUtils.getFileDto());
+
+                    ServiceModule.start(FileConversionService.class, this, properties, ServiceType.FILE_CONVERSION_SERVICE);
+                    new RefreshHandler((ListFragment) listFragment).sendEmptyMessage(RefreshHandler.FILE_REFRESH_CMD);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Select a pdf file", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

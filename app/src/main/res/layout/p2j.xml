@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-        <variable
-            name="user"
-            type="p2j.evolv.com.p2j_v2.model.ListElementDto" />
-    </data>
+    <!--<data>-->
+        <!--<variable-->
+            <!--name="user"-->
+            <!--type="p2j.evolv.com.p2j_v2.model.ListElementDto" />-->
+    <!--</data>-->
 
     <LinearLayout
         android:id="@+id/root_layout"

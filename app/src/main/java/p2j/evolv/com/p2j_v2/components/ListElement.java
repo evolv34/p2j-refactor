@@ -12,27 +12,27 @@ import java.io.File;
 import java.util.List;
 
 import p2j.evolv.com.p2j_v2.R;
+import p2j.evolv.com.p2j_v2.files.FileType;
 
-public class ListElementProcessor extends ArrayAdapter<String> {
+public class ListElement extends ArrayAdapter<File> {
 
     Context context;
-    LayoutInflater inflater = null;
-    List<File> fileNameList;
+    List<File> files;
 
-    public ListElementProcessor(Context context, int resource, List<File> file_name_list) {
+    public ListElement(Context context, int resource, List<File> files) {
         super(context, resource);
         this.context = context;
-        this.fileNameList = file_name_list;
+        this.files = files;
     }
 
     @Override
     public int getCount() {
-        return this.fileNameList.size();
+        return this.files.size();
     }
 
     @Override
-    public String getItem(int position) {
-        return null;
+    public File getItem(int position) {
+        return this.files.get(position);
     }
 
     @Override
@@ -42,9 +42,7 @@ public class ListElementProcessor extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (inflater == null) {
-            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_element, parent, false);
         }
@@ -53,16 +51,16 @@ public class ListElementProcessor extends ArrayAdapter<String> {
         TextView fileNameView = (TextView) convertView.findViewById(R.id.file_name);
         TextView fileDetails = (TextView) convertView.findViewById(R.id.file_details);
 
-        File file = fileNameList.get(position);
+        File file = files.get(position);
         String fileName = file.getName();
         fileNameView.setText(fileName);
         fileDetails.setText(String.valueOf(file.length()));
 
-        if (!(fileName.endsWith(".pdf") || fileName.endsWith(".jpg"))) {
+        if (file.isDirectory()) {
             icon.setImageResource(R.drawable.folder);
-        } else if (fileName.endsWith(".pdf")) {
+        } else if (fileName.endsWith(FileType.PDF.fileType())) {
             icon.setImageResource(R.drawable.pdf_icon);
-        } else if (fileName.endsWith(".jpg")) {
+        } else if (fileName.endsWith(FileType.JPEG.fileType())) {
             icon.setImageResource(R.drawable.jpg);
         }
         return convertView;

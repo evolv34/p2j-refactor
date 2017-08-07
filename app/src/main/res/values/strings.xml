@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">P2J-v2</string>
-
-    <string name="title_activity_splashscreen">Splashscreen</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="p2j_title">P2J</string>
+    <string name="menu_global_option_title">Option</string>
+    <string name="menu_global_back">Back</string>
+    <string name="menu_global_convert">Convert</string>
 </resources>

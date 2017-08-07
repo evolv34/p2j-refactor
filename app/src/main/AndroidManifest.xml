@@ -12,17 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.P2J">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+        <service android:name=".services.FileConversionService"></service>
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+        <activity android:name=".screens.P2J"></activity>
         <activity
             android:name=".screens.Splashscreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splashscreen"
+            android:label="@string/p2j_title"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

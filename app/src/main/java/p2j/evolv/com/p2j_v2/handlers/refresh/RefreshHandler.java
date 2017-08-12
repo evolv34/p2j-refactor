@@ -1,8 +1,8 @@
 package p2j.evolv.com.p2j_v2.handlers.refresh;
 
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import p2j.evolv.com.p2j_v2.components.ListFragment;
@@ -11,11 +11,10 @@ import p2j.evolv.com.p2j_v2.files.FileUtils;
 public class RefreshHandler extends Handler {
 
     public static final int FILE_REFRESH_CMD = 1;
-    private ListFragment listFragment;
-    private FileUtils fileUtils = new FileUtils();
+    private Fragment fragment;
 
-    public RefreshHandler(ListFragment listFragment) {
-        this.listFragment = listFragment;
+    public RefreshHandler(Fragment listFragment) {
+        this.fragment = listFragment;
     }
 
     @Override
@@ -23,13 +22,12 @@ public class RefreshHandler extends Handler {
         switch (msg.what) {
             case FILE_REFRESH_CMD: {
                 try {
-                    Log.i(getClass().getName(), "File refresh command is called");
-                    fileUtils.create(FileUtils.getFileDto().getPath());
-                    String parentPath = fileUtils.getParent(FileUtils.getFileDto().getPath());
+                    new FileUtils(FileUtils.getFileDto().getPath()).create();
+                    String parentPath = new FileUtils(FileUtils.getFileDto().getPath()).getParent();
 
-                    listFragment.update(parentPath);
+                    ((ListFragment) fragment).update(parentPath);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(getClass().getName(), "Unable to update files", e);
                 }
                 break;
             }

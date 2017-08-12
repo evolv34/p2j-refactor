@@ -1,6 +1,7 @@
 package p2j.evolv.com.p2j_v2.components;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import p2j.evolv.com.p2j_v2.R;
 import p2j.evolv.com.p2j_v2.files.FileType;
+import p2j.evolv.com.p2j_v2.files.FileUtils;
 
 public class ListElement extends ArrayAdapter<File> {
 
@@ -54,7 +56,9 @@ public class ListElement extends ArrayAdapter<File> {
         File file = files.get(position);
         String fileName = file.getName();
         fileNameView.setText(fileName);
-        fileDetails.setText(String.valueOf(file.length()));
+
+        Long filesize = new FileUtils(file.getPath()).size();
+        fileDetails.setText(FileUtils.Conversions.convert(filesize));
 
         if (file.isDirectory()) {
             icon.setImageResource(R.drawable.folder);

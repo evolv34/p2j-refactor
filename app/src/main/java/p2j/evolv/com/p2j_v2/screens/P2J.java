@@ -2,7 +2,6 @@ package p2j.evolv.com.p2j_v2.screens;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -10,7 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -21,8 +19,6 @@ import p2j.evolv.com.p2j_v2.R;
 import p2j.evolv.com.p2j_v2.components.ListFragment;
 import p2j.evolv.com.p2j_v2.files.FileUtils;
 import p2j.evolv.com.p2j_v2.handlers.refresh.RefreshHandler;
-import p2j.evolv.com.p2j_v2.model.FileDto;
-import p2j.evolv.com.p2j_v2.processors.PdfProcessor;
 import p2j.evolv.com.p2j_v2.services.FileConversionService;
 import p2j.evolv.com.p2j_v2.services.ServiceModule;
 import p2j.evolv.com.p2j_v2.services.ServiceType;
@@ -46,17 +42,11 @@ public class P2J extends AppCompatActivity {
                     .replace(R.id.root_layout, listFragment, "filesList")
                     .commit();
         }
-//        P2jBinding binding = DataBindingUtil.setContentView(this, R.layout.p2j);
-//        ListElementDto user = new ListElementDto("Pradeep");
-////
-//        binding.
-//        binding.setUser(user);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.global_menu, menu);
+        getMenuInflater().inflate(R.menu.global_menu, menu);
         return true;
     }
 
@@ -71,7 +61,10 @@ public class P2J extends AppCompatActivity {
                     Map<String, Parcelable> properties = new HashMap<>();
                     properties.put("fileDto", FileUtils.getFileDto());
 
-                    ServiceModule.start(FileConversionService.class, this, properties, ServiceType.FILE_CONVERSION_SERVICE);
+                    ServiceModule.start(FileConversionService.class,
+                                        this,
+                                        properties,
+                                        ServiceType.FILE_CONVERSION_SERVICE);
                     new RefreshHandler((ListFragment) listFragment).sendEmptyMessage(RefreshHandler.FILE_REFRESH_CMD);
                 } else {
                     Toast.makeText(getApplicationContext(), "Select a pdf file", Toast.LENGTH_LONG).show();
@@ -85,6 +78,5 @@ public class P2J extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
     }
 }

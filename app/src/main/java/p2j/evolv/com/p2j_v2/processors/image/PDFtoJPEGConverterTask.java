@@ -1,10 +1,7 @@
 package p2j.evolv.com.p2j_v2.processors.image;
 
 import android.graphics.pdf.PdfRenderer;
-import android.os.SystemClock;
-import android.util.Log;
 
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

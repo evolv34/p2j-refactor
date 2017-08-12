@@ -13,10 +13,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/list_view"
+        <!--<ListView-->
+            <!--android:id="@+id/list_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:entries="@color/colorPrimary" />-->
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/swipeview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:entries="@color/colorPrimary" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </layout>

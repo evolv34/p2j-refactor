@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import p2j.evolv.com.p2j_v2.R;
-import p2j.evolv.com.p2j_v2.services.FileConversionService;
 
 public class Splashscreen extends AppCompatActivity {
     private final Handler activityHandler = new Handler();
@@ -31,7 +30,7 @@ public class Splashscreen extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        for(int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
         }
 
         hideActionBar();
@@ -48,5 +47,17 @@ public class Splashscreen extends AppCompatActivity {
     private void close(int delayMillis) {
         activityHandler.removeCallbacks(redirectRunnable);
         activityHandler.postDelayed(redirectRunnable, delayMillis);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

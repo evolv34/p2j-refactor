@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import p2j.evolv.com.p2j_v2.files.FileUtils;
 import p2j.evolv.com.p2j_v2.model.FileDto;
 import p2j.evolv.com.p2j_v2.processors.PdfProcessor;
 

@@ -10,8 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.io.File;
 
@@ -20,9 +21,7 @@ import p2j.evolv.com.p2j_v2.files.FileUtils;
 import p2j.evolv.com.p2j_v2.model.FileDto;
 
 public class ListFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private FileUtils fileUtils = new FileUtils();
-    private ListView listview = null;
-    private boolean isUpdateEnable = false;
+    private SwipeMenuListView listview = null;
 
     public static Fragment newInstance() {
         return new ListFragment();
@@ -37,15 +36,17 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.p2j_list_fragment, container, false);
-        listview = (ListView) view.findViewById(R.id.list_view);
+        listview = (SwipeMenuListView) view.findViewById(R.id.swipeview);
 
         try {
             update(Environment.getExternalStorageDirectory().getAbsolutePath());
         } catch (Exception e) {
             Log.e(getClass().getName(), e.getMessage());
         }
-        listview.setOnItemClickListener(this);
 
+        listview.setOnItemClickListener(this);
+        listview.setMenuCreator(new FileListMenu.MenuCreator(getContext()));
+        listview.setOnMenuItemClickListener(new FileListMenu.OnMenuItemClientListener(this));
         return view;
     }
 
@@ -68,7 +69,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
 
     public void up() {
         try {
-            String parentPath = fileUtils.getParent(FileUtils.getFileDto().getPath());
+            String parentPath = new FileUtils(FileUtils.getFileDto().getPath()).getParent();
             update(parentPath);
         } catch (Exception e) {
             Log.e(getClass().getName(), e.getMessage());
@@ -76,7 +77,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
     }
 
     public void update(String path) throws Exception {
-        FileDto fileDto = fileUtils.files(path);
+        FileDto fileDto = new FileUtils(path).files();
         ListElement rows = new ListElement(this.getContext(), R.layout.list_element, fileDto.getFiles());
         listview.setAdapter(rows);
     }

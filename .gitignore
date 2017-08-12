@@ -6,5 +6,6 @@
 .DS_Store
 /build
 /.idea
+/app/app-release.apk
 /captures
 .externalNativeBuild

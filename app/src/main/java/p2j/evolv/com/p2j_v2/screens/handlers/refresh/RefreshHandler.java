@@ -1,12 +1,12 @@
-package p2j.evolv.com.p2j_v2.handlers.refresh;
+package p2j.evolv.com.p2j_v2.screens.handlers.refresh;
 
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import p2j.evolv.com.p2j_v2.components.ListFragment;
-import p2j.evolv.com.p2j_v2.files.FileUtils;
+import p2j.evolv.com.p2j_v2.screens.components.ListFragment;
+import p2j.evolv.com.p2j_v2.utils.FileUtils;
 
 public class RefreshHandler extends Handler {
 

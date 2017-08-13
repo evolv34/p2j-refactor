@@ -17,7 +17,6 @@ public class ServiceModule {
                              ServiceType serviceType) {
         switch (serviceType) {
             case FILE_CONVERSION_SERVICE:
-                Log.i(ServiceModule.class.getName(), "starting file conversion");
                 Iterator<String> propertiesKey = properties.keySet().iterator();
                 Intent intent = new Intent(context, service);
 

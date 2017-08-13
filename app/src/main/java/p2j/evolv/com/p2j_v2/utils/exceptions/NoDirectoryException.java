@@ -1,4 +1,4 @@
-package p2j.evolv.com.p2j_v2.files.exceptions;
+package p2j.evolv.com.p2j_v2.utils.exceptions;
 
 public class NoDirectoryException extends Exception {
 

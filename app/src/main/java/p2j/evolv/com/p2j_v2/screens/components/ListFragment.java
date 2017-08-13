@@ -1,4 +1,4 @@
-package p2j.evolv.com.p2j_v2.components;
+package p2j.evolv.com.p2j_v2.screens.components;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import java.io.File;
 
 import p2j.evolv.com.p2j_v2.R;
-import p2j.evolv.com.p2j_v2.files.FileUtils;
+import p2j.evolv.com.p2j_v2.utils.FileUtils;
 import p2j.evolv.com.p2j_v2.model.FileDto;
 
 public class ListFragment extends Fragment implements AdapterView.OnItemClickListener {

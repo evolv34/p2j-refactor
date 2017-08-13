@@ -1,16 +1,15 @@
-package p2j.evolv.com.p2j_v2.files;
+package p2j.evolv.com.p2j_v2.utils;
 
 import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import p2j.evolv.com.p2j_v2.files.exceptions.NoDirectoryException;
-import p2j.evolv.com.p2j_v2.files.exceptions.ParentNotFoundException;
+import p2j.evolv.com.p2j_v2.utils.exceptions.NoDirectoryException;
+import p2j.evolv.com.p2j_v2.utils.exceptions.ParentNotFoundException;
 import p2j.evolv.com.p2j_v2.model.FileDto;
 
 public class FileUtils {

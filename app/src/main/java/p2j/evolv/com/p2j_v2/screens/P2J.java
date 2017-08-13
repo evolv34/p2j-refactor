@@ -16,9 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import p2j.evolv.com.p2j_v2.R;
-import p2j.evolv.com.p2j_v2.components.ListFragment;
-import p2j.evolv.com.p2j_v2.files.FileUtils;
-import p2j.evolv.com.p2j_v2.handlers.refresh.RefreshHandler;
+import p2j.evolv.com.p2j_v2.screens.components.ListFragment;
+import p2j.evolv.com.p2j_v2.services.AppNotificationService;
+import p2j.evolv.com.p2j_v2.utils.FileUtils;
+import p2j.evolv.com.p2j_v2.screens.handlers.refresh.RefreshHandler;
 import p2j.evolv.com.p2j_v2.services.FileConversionService;
 import p2j.evolv.com.p2j_v2.services.ServiceModule;
 import p2j.evolv.com.p2j_v2.services.ServiceType;
@@ -65,6 +66,7 @@ public class P2J extends AppCompatActivity {
                                         this,
                                         properties,
                                         ServiceType.FILE_CONVERSION_SERVICE);
+                    new AppNotificationService(this).create(1, FileUtils.getFileDto());
                     new RefreshHandler((ListFragment) listFragment).sendEmptyMessage(RefreshHandler.FILE_REFRESH_CMD);
                 } else {
                     Toast.makeText(getApplicationContext(), "Select a pdf file", Toast.LENGTH_LONG).show();

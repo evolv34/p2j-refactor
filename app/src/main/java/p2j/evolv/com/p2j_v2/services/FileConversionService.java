@@ -7,9 +7,11 @@ import android.util.Log;
 
 import p2j.evolv.com.p2j_v2.model.FileDto;
 import p2j.evolv.com.p2j_v2.processors.PdfProcessor;
+import p2j.evolv.com.p2j_v2.utils.FileUtils;
 
 
 public class FileConversionService extends IntentService {
+
     public FileConversionService() {
         super("FileConversionService");
     }
@@ -18,6 +20,7 @@ public class FileConversionService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         FileDto fileDto = (FileDto) intent.getExtras().get("fileDto");
         new PdfProcessor(fileDto).execute();
+        new AppNotificationService(this).create(1, FileUtils.getFileDto());
     }
 
     @Override

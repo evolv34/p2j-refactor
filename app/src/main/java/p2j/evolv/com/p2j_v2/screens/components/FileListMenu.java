@@ -1,4 +1,4 @@
-package p2j.evolv.com.p2j_v2.components;
+package p2j.evolv.com.p2j_v2.screens.components;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,7 +13,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import p2j.evolv.com.p2j_v2.R;
-import p2j.evolv.com.p2j_v2.files.FileUtils;
+import p2j.evolv.com.p2j_v2.utils.FileUtils;
 
 public class FileListMenu {
     public static class MenuCreator implements SwipeMenuCreator {

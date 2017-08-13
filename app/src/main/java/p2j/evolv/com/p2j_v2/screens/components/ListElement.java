@@ -1,7 +1,6 @@
-package p2j.evolv.com.p2j_v2.components;
+package p2j.evolv.com.p2j_v2.screens.components;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,8 @@ import java.io.File;
 import java.util.List;
 
 import p2j.evolv.com.p2j_v2.R;
-import p2j.evolv.com.p2j_v2.files.FileType;
-import p2j.evolv.com.p2j_v2.files.FileUtils;
+import p2j.evolv.com.p2j_v2.utils.FileType;
+import p2j.evolv.com.p2j_v2.utils.FileUtils;
 
 public class ListElement extends ArrayAdapter<File> {
 

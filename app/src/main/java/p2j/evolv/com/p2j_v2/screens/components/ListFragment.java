@@ -15,6 +15,9 @@ import android.widget.TextView;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.io.File;
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import p2j.evolv.com.p2j_v2.R;
 import p2j.evolv.com.p2j_v2.utils.FileUtils;
@@ -22,6 +25,7 @@ import p2j.evolv.com.p2j_v2.model.FileDto;
 
 public class ListFragment extends Fragment implements AdapterView.OnItemClickListener {
     private SwipeMenuListView listview = null;
+    private Queue<View> viewsQueue = new LinkedList<>();
 
     public static Fragment newInstance() {
         return new ListFragment();
@@ -65,6 +69,14 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         view.setBackgroundColor(Color.rgb(50, 80, 109));
         ((TextView) view.findViewById(R.id.file_name)).setTextColor(Color.WHITE);
         ((TextView) view.findViewById(R.id.file_details)).setTextColor(Color.WHITE);
+
+        if (!viewsQueue.isEmpty()) {
+            View previousView = viewsQueue.remove();
+            previousView.setBackgroundColor(Color.rgb(255, 255, 255));
+            ((TextView) previousView.findViewById(R.id.file_name)).setTextColor(Color.BLACK);
+            ((TextView) previousView.findViewById(R.id.file_details)).setTextColor(Color.BLACK);
+        }
+        viewsQueue.add(view);
     }
 
     public void up() {

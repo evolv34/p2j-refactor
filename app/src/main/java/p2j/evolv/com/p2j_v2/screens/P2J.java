@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -30,6 +31,10 @@ public class P2J extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.p2j);
+
+        Bundle argsToList = new Bundle();
+        argsToList.putString("path", getIntent().getExtras().getString("path"));
+        listFragment.setArguments(argsToList);
 
         final int permission = ActivityCompat.checkSelfPermission((Activity) this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
@@ -62,9 +67,9 @@ public class P2J extends AppCompatActivity {
                     properties.put("fileDto", FileUtils.getFileDto());
 
                     ServiceModule.start(FileConversionService.class,
-                                        this,
-                                        properties,
-                                        ServiceType.FILE_CONVERSION_SERVICE);
+                            this,
+                            properties,
+                            ServiceType.FILE_CONVERSION_SERVICE);
 
                     new RefreshHandler(listFragment).sendEmptyMessage(RefreshHandler.FILE_REFRESH_CMD);
                 } else {

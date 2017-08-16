@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
@@ -19,6 +20,7 @@ public class Splashscreen extends AppCompatActivity {
         @Override
         public void run() {
             Intent intent = new Intent(getApplicationContext(), P2J.class);
+            intent.putExtra("path", Environment.getExternalStorageDirectory().getPath());
             startActivity(intent);
         }
     };

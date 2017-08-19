@@ -12,11 +12,6 @@ import java.util.concurrent.ForkJoinPool;
 import p2j.evolv.com.p2j_v2.model.FileDto;
 
 public class ApplicationModule {
-    public static ForkJoinPool provideForkJoinPool() {
-        int executorPoolSize = Runtime.getRuntime().availableProcessors();
-        return new ForkJoinPool(executorPoolSize);
-    }
-
     public static PdfRenderer providePdfRenderer(FileDto fileDto) {
         try {
             Log.i("sampleClassName", "file ==> "+fileDto.getPath());

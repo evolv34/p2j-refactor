@@ -1,5 +1,6 @@
 package p2j.evolv.com.p2j_v2.services;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,15 +25,17 @@ public class AppNotificationService {
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder mBuilder =
+        Notification notification =
                 new NotificationCompat.Builder(this.context)
                         .setSmallIcon(R.drawable.p2j)
                         .setContentTitle("1 File Converted")
                         .setContentText(fileDto.getPath())
                         .setAutoCancel(true)
-                        .setContentIntent(intent);
+                        .setContentIntent(intent)
+                        .build();
 
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(id, mBuilder.build());
+        mNotificationManager.notify(id, notification);
     }
 }

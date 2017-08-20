@@ -5,12 +5,11 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Arrays;
 
+import p2j.evolv.com.p2j_v2.model.FileDto;
 import p2j.evolv.com.p2j_v2.utils.exceptions.NoDirectoryException;
 import p2j.evolv.com.p2j_v2.utils.exceptions.ParentNotFoundException;
-import p2j.evolv.com.p2j_v2.model.FileDto;
 
 public class FileUtils {
     private static FileDto fileDto = null;
@@ -35,7 +34,7 @@ public class FileUtils {
             return FileUtils.fileDto;
         } catch (Exception e) {
             Log.e(getClass().getName(), "path is not a directory " + path);
-            FileUtils.fileDto = new FileDto(path, new ArrayList<File>());
+            FileUtils.fileDto = new FileDto(path, FileUtils.fileDto.getFiles());
             throw new NoDirectoryException("path is not a directory " + path, e);
         }
     }
@@ -70,13 +69,8 @@ public class FileUtils {
     }
 
     public static class Conversions {
-        private static final FileUnits[] FILE_UNITS = FileUnits.values();
-
         public static String convert(final long value) {
             return org.apache.commons.io.FileUtils.byteCountToDisplaySize(BigInteger.valueOf(value));
-//            if (value <= 0) return "0.0 " + FileUnits.B.getUnit();
-//            int digitGroups = (int) (Math.log10(value) / Math.log10(1024));
-//            return new DecimalFormat("#,##0.#").format(value / Math.pow(1024, digitGroups)) + " " + FILE_UNITS[digitGroups].getUnit();
         }
     }
 }

@@ -4,7 +4,6 @@ import android.graphics.pdf.PdfRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.RecursiveAction;
 
 import p2j.evolv.com.p2j_v2.model.FileDto;
@@ -19,7 +18,6 @@ public class PDFtoJPEGConverterTask extends RecursiveAction {
     private int startPage = 0;
     private int endPage = 0;
     private boolean isFanOut = false;
-    private UUID threadId = UUID.randomUUID();
 
     private PDFToJPEGConverter pdfToJPEGConverter;
 

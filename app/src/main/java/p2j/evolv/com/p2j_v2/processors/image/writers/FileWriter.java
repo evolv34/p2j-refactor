@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class FileWriter implements Writer {
+public class FileWriter extends Writer {
 
     private Bitmap newPage;
     private String src;

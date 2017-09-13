@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class ServiceModule {
 
     public static void start(Class<? extends IntentService> service,
                              Context context,
-                             Map<String, Parcelable> properties,
+                             Map<String, Serializable> properties,
                              ServiceType serviceType) {
         switch (serviceType) {
             case FILE_CONVERSION_SERVICE:

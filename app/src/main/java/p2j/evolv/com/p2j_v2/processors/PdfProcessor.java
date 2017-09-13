@@ -6,7 +6,7 @@ import java.util.concurrent.ForkJoinPool;
 
 import p2j.evolv.com.p2j_v2.ApplicationModule;
 import p2j.evolv.com.p2j_v2.model.FileDto;
-import p2j.evolv.com.p2j_v2.processors.image.PDFtoJPEGConverterTask;
+import p2j.evolv.com.p2j_v2.tasks.PDFtoJPEGConverterTask;
 
 public class PdfProcessor extends Processor {
     private FileDto fileDto;

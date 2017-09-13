@@ -1,4 +1,4 @@
-package p2j.evolv.com.p2j_v2.processors.image;
+package p2j.evolv.com.p2j_v2.tasks;
 
 import android.graphics.pdf.PdfRenderer;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.RecursiveAction;
 
 import p2j.evolv.com.p2j_v2.model.FileDto;
-import p2j.evolv.com.p2j_v2.processors.image.converters.PDFToJPEGConverter;
+import p2j.evolv.com.p2j_v2.converters.PDFToJPEGConverter;
 
 
 public class PDFtoJPEGConverterTask extends RecursiveAction {

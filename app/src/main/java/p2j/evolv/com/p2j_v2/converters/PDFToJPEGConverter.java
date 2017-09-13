@@ -1,10 +1,9 @@
-package p2j.evolv.com.p2j_v2.processors.image.converters;
+package p2j.evolv.com.p2j_v2.converters;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.pdf.PdfRenderer;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -13,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p2j.evolv.com.p2j_v2.model.FileDto;
-import p2j.evolv.com.p2j_v2.processors.image.writers.FileWriter;
-import p2j.evolv.com.p2j_v2.processors.image.writers.Writer;
+import p2j.evolv.com.p2j_v2.writers.Writer;
 
 public class PDFToJPEGConverter extends Converter {
 

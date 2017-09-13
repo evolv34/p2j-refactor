@@ -1,4 +1,4 @@
-package p2j.evolv.com.p2j_v2.processors.image.writers;
+package p2j.evolv.com.p2j_v2.writers;
 
 import android.graphics.Bitmap;
 

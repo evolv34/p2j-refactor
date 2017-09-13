@@ -13,10 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import p2j.evolv.com.p2j_v2.R;
+import p2j.evolv.com.p2j_v2.processors.Processor;
 import p2j.evolv.com.p2j_v2.screens.components.ListFragment;
 import p2j.evolv.com.p2j_v2.screens.handlers.refresh.RefreshHandler;
 import p2j.evolv.com.p2j_v2.services.FileConversionService;
@@ -63,13 +65,14 @@ public class P2J extends AppCompatActivity {
                 return true;
             case R.id.convert:
                 if (FileUtils.isValidPath()) {
-                    Map<String, Parcelable> properties = new HashMap<>();
+                    Map<String, Serializable> properties = new HashMap<>();
                     properties.put("fileDto", FileUtils.getFileDto());
+                    properties.put("processor", Processor.ProcessType.PDF_TO_IMAGE_PROCESSOR);
 
                     ServiceModule.start(FileConversionService.class,
-                            this,
-                            properties,
-                            ServiceType.FILE_CONVERSION_SERVICE);
+                                        this,
+                                        properties,
+                                        ServiceType.FILE_CONVERSION_SERVICE);
 
                     new RefreshHandler(listFragment).sendEmptyMessage(RefreshHandler.FILE_REFRESH_CMD);
                 } else {

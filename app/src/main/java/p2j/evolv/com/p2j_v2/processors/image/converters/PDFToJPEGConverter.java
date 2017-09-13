@@ -9,19 +9,24 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import p2j.evolv.com.p2j_v2.model.FileDto;
 import p2j.evolv.com.p2j_v2.processors.image.writers.FileWriter;
+import p2j.evolv.com.p2j_v2.processors.image.writers.Writer;
 
-public class PDFToJPEGConverter implements Converter {
+public class PDFToJPEGConverter extends Converter {
 
     private int startPage;
     private int endPage;
     private FileDto fileDto;
     private PdfRenderer pdfRenderer;
-    private File baseSrc = Environment.getExternalStorageDirectory();
 
-    public PDFToJPEGConverter(PdfRenderer pdfRenderer, FileDto fileDto, int startPage, int endPage) {
+    public PDFToJPEGConverter(PdfRenderer pdfRenderer,
+                              FileDto fileDto,
+                              int startPage,
+                              int endPage) {
         this.startPage = startPage;
         this.endPage = endPage;
         this.pdfRenderer = pdfRenderer;
@@ -31,6 +36,7 @@ public class PDFToJPEGConverter implements Converter {
     @Override
     public void convert() {
         String folderPath = createFolderIfNotExists(this.fileDto.getPath());
+        List<Bitmap> pages = new ArrayList<>();
         for (int i = this.startPage; i <= this.endPage; i++) {
             try {
                 Bitmap newPageBitmap = createBitmap();
@@ -39,7 +45,7 @@ public class PDFToJPEGConverter implements Converter {
                 PdfRenderer.Page page = pdfRenderer.openPage(i);
                 page.render(newPageBitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_PRINT);
 
-                new FileWriter(newPageBitmap, folderPath + "/page-" + i + ".jpg").write();
+                Writer.write_2(Writer.WriterType.FILE_WRITER, newPageBitmap, folderPath + "/page-" + i + ".jpg");
                 page.close();
             } catch (Exception e) {
                 Log.e(getClass().getName(), "Could not create image for the page [" + i + "]", e);
@@ -49,7 +55,7 @@ public class PDFToJPEGConverter implements Converter {
 
     @NonNull
     private String createFolderIfNotExists(String src) {
-        String folderPath = src.split(".pdf")[0];
+        String folderPath = src.split("\\.pdf")[0];
         File folder = new File(folderPath);
         if (!folder.exists()) {
             folder.mkdirs();

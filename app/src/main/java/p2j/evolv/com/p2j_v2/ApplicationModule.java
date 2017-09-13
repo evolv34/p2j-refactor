@@ -14,7 +14,6 @@ import p2j.evolv.com.p2j_v2.model.FileDto;
 public class ApplicationModule {
     public static PdfRenderer providePdfRenderer(FileDto fileDto) {
         try {
-            Log.i("sampleClassName", "file ==> "+fileDto.getPath());
             return new PdfRenderer(getSeekableFileDescriptor(fileDto));
         } catch (IOException e) {
             e.printStackTrace();

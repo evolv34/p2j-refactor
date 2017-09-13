@@ -4,9 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 
-public class FileDto implements Parcelable {
+public class FileDto implements Parcelable, Serializable {
     private String path;
     private List<File> files;
 

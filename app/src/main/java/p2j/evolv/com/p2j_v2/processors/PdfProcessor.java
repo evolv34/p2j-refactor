@@ -8,7 +8,7 @@ import p2j.evolv.com.p2j_v2.ApplicationModule;
 import p2j.evolv.com.p2j_v2.model.FileDto;
 import p2j.evolv.com.p2j_v2.processors.image.PDFtoJPEGConverterTask;
 
-public class PdfProcessor implements Processor {
+public class PdfProcessor extends Processor {
     private FileDto fileDto;
 
     private ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
@@ -16,7 +16,7 @@ public class PdfProcessor implements Processor {
 
     public PdfProcessor(FileDto fileDto) {
         this.fileDto = fileDto;
-        this.pdfRenderer = ApplicationModule.providePdfRenderer(this.fileDto);
+        this.pdfRenderer = ApplicationModule.providePdfRenderer(fileDto);
     }
 
     @Override
